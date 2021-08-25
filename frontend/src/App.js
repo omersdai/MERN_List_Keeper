@@ -1,7 +1,14 @@
 import { Fragment } from 'react';
+import Header from './components/Header';
+import './App.scss';
 
 const App = () => {
-  return <Fragment className='App'>Ses</Fragment>;
+  return (
+    <Fragment>
+      <Header />
+      Ses
+    </Fragment>
+  );
 };
 
 export default App;

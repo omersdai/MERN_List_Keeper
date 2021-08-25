@@ -1,0 +1,30 @@
+{
+  "name": "mern_list_keeper",
+  "version": "1.0.0",
+  "description": "MERN List Keeper App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/omersdai/MERN_List_Keeper.git"
+  },
+  "author": "Omer Dai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/omersdai/MERN_List_Keeper/issues"
+  },
+  "homepage": "https://github.com/omersdai/MERN_List_Keeper#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.1",
+    "nodemon": "^2.0.12"
+  }
+}
