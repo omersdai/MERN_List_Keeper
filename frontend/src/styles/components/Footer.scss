@@ -1,0 +1,13 @@
+@import '../variables';
+@import '../utilities';
+
+footer {
+  height: $footerHeight;
+  width: 100%;
+  @include set-background($secondaryColor);
+  padding: 20px 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

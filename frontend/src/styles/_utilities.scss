@@ -2,6 +2,21 @@
   display: none !important;
 }
 
+@function set-text-color($bg-color) {
+  @if (lightness($bg-color) > 50) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+
+// Set background & text color
+// @include set-background($color)
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}
+
 // @extend %flex-center;
 %flex-center {
   display: flex;

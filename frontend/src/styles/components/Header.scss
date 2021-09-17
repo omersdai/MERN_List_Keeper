@@ -1,5 +1,25 @@
-div {
-  background-color: red;
-  height: 50px;
-  width: 50px;
+@import '../variables';
+@import '../utilities';
+
+header {
+  height: $headerHeight;
+  width: 100%;
+  @include set-background($secondaryColor);
+  color: $thirdColor;
+  padding: 20px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+    display: inline-block;
+  }
+  ul {
+    display: flex;
+    gap: 15px;
+  }
+
+  a {
+    color: $thirdColor;
+  }
 }

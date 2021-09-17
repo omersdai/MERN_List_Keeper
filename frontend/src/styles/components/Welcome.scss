@@ -1,0 +1,11 @@
+@import '../variables';
+@import '../utilities';
+
+.welcome {
+  margin-top: 100px;
+  height: 100%;
+
+  @extend %flex-center;
+  flex-direction: column;
+  gap: 20px;
+}

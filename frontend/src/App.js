@@ -1,13 +1,18 @@
 import { Fragment } from 'react';
 import Header from './components/Header';
+import Welcome from './components/Welcome';
+import Footer from './components/Footer';
 import './styles/App.scss';
 
 const App = () => {
   return (
-    <Fragment>
+    <div className='app-body'>
       <Header />
-      Ses
-    </Fragment>
+      <main>
+        <Welcome />
+      </main>
+      <Footer />
+    </div>
   );
 };
 
