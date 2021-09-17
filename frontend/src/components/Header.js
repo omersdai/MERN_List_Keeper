@@ -1,22 +1,23 @@
 import React from 'react';
 import '../styles/components/Header.scss';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
     <header>
-      <a href='/'>
+      <Link to='/'>
         <h1>List Keeper</h1>
-      </a>
+      </Link>
       <ul>
         <li>
-          <a href='/login'>
+          <Link to='/login'>
             <i className='fas fa-sign-in-alt'></i> Log In
-          </a>
+          </Link>
         </li>
         <li>
-          <a href='/signup'>
+          <Link to='/signup'>
             <i className='fas fa-user-plus'></i> Sign Up
-          </a>
+          </Link>
         </li>
       </ul>
     </header>
