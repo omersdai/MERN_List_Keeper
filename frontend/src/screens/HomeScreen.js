@@ -1,19 +1,29 @@
 import { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { listUsers } from '../actions/userActions';
 import Welcome from '../components/Welcome';
-import axios from 'axios';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
 
 const HomeScreen = () => {
-  useEffect(() => {
-    const fetchServer = async () => {
-      const { data } = await axios.get('/api');
-      console.log(data);
-    };
+  const dispatch = useDispatch();
 
-    fetchServer();
-  });
+  const userList = useSelector((state) => state.userList);
+  const { loading, users, error } = userList;
+
+  console.log(users);
+  useEffect(() => {
+    dispatch(listUsers());
+  }, [dispatch]);
   return (
     <Fragment>
-      <Welcome />
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant='danger'>{error}</Message>
+      ) : (
+        <Welcome />
+      )}
     </Fragment>
   );
 };
