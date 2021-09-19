@@ -1,5 +1,16 @@
+// @extend %flex-center;
+
 .hide {
   display: none !important;
+}
+
+%btn {
+  font-size: 15px;
+  padding: 15px 30px;
+
+  &:active {
+    transform: scale(95%);
+  }
 }
 
 @function set-text-color($bg-color) {
@@ -17,7 +28,6 @@
   color: set-text-color($color);
 }
 
-// @extend %flex-center;
 %flex-center {
   display: flex;
   justify-content: center;

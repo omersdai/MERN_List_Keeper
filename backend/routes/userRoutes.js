@@ -30,4 +30,29 @@ router.get(
   })
 );
 
+// @desc Create new user
+// @route POST /api/users
+// @access Public
+router.post(
+  '/',
+  asynchHandler(async (req, res) => {
+    console.log(req);
+    const { name, email, password, isAdmin } = req.body;
+
+    const user = await User.create({
+      name,
+      email,
+      password,
+      isAdmin,
+    });
+
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(400);
+      throw new Error('Invalid user data');
+    }
+  })
+);
+
 export default router;

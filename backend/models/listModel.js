@@ -12,7 +12,7 @@ const listSchema = mongoose.Schema(
       required: true,
     },
     items: {
-      type: [String],
+      type: [Map],
       required: true,
       default: [],
     },
