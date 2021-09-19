@@ -5,11 +5,11 @@ import {
   LIST_INVENTORY_FAIL,
 } from '../constants/listConstants';
 
-export const getInventoryList = () => async (dispatch) => {
+export const getInventoryList = (id) => async (dispatch) => {
   try {
     dispatch({ type: LIST_INVENTORY_REQUEST });
 
-    const { data } = await axios.get('/api/list');
+    const { data } = await axios.get(`/api/lists/${id}`);
 
     dispatch({
       type: LIST_INVENTORY_SUCCESS,

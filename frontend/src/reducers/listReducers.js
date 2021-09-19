@@ -4,18 +4,18 @@ import {
   LIST_INVENTORY_FAIL,
 } from '../constants/listConstants';
 
-//   export const userListReducer = (state = { users: [] }, action) => {
-//     switch (action.type) {
-//       case USER_LIST_REQUEST:
-//         return { loading: true, users: [] };
-//       case USER_LIST_SUCCESS:
-//         return { loading: false, users: action.payload };
-//       case USER_LIST_FAIL:
-//         return { loading: false, error: action.payload };
-//       default:
-//         return state;
-//     }
-//   };
+export const listInventoryReducer = (state = { listInventory: [] }, action) => {
+  switch (action.type) {
+    case LIST_INVENTORY_REQUEST:
+      return { loading: true, listInventory: [] };
+    case LIST_INVENTORY_SUCCESS:
+      return { loading: false, listInventory: action.payload };
+    case LIST_INVENTORY_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 
 //   export const userReducer = (state = { user: {} }, action) => {
 //     switch (action.type) {
