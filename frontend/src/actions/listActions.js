@@ -3,13 +3,18 @@ import {
   LIST_INVENTORY_REQUEST,
   LIST_INVENTORY_SUCCESS,
   LIST_INVENTORY_FAIL,
+  LIST_ADD_REQUEST,
 } from '../constants/listConstants';
 
 export const getInventoryList = (id) => async (dispatch) => {
   try {
     dispatch({ type: LIST_INVENTORY_REQUEST });
 
-    const { data } = await axios.get(`/api/lists/${id}`);
+    console.log(id);
+    const { data } = await axios.get('/api/lists', {
+      headers: { 'Content-Type': 'application/json' },
+      data: { user: id },
+    });
 
     dispatch({
       type: LIST_INVENTORY_SUCCESS,
@@ -24,4 +29,10 @@ export const getInventoryList = (id) => async (dispatch) => {
           : error.message,
     });
   }
+};
+
+export const createList = (name) => (dispatch) => {
+  try {
+    dispatch({ type: LIST_ADD_REQUEST });
+  } catch (error) {}
 };

@@ -12,7 +12,6 @@ const HomeScreen = () => {
   const user = useSelector((state) => state.user);
   const { loading, users, error } = userList;
 
-  console.log(users);
   useEffect(() => {
     dispatch(listUsers());
     dispatch(getUser('61462902969c22c63acde0a5')); // for testing purposes

@@ -12,9 +12,7 @@ connectDB();
 
 const app = express();
 
-// app.get('/api', (req, res) => {
-//   res.json({ theAnswer: 'API is running...' });
-// });
+app.use(express.json()); //Used to parse JSON bodies
 
 app.use('/api/users', userRoutes);
 app.use('/api/lists', listRoutes);

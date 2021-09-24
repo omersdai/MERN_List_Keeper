@@ -1,5 +1,6 @@
 // @extend %flex-center;
 // @inlcude set-background($color);
+// background: darken($primaryColor, 10%) lighten($primaryColor, 10%)
 .hide {
   display: none !important;
 }
@@ -7,9 +8,16 @@
 %btn {
   font-size: 15px;
   padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 
   &:active {
     transform: scale(95%);
+  }
+
+  &:hover {
+    filter: brightness(0.95);
   }
 }
 
