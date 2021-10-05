@@ -10,7 +10,7 @@ export const getUsers = asynchHandler(async (req, res) => {
 });
 
 // @desc Create new user
-// @route POST /api/users
+// @route GET /api/users/:id
 // @access Public
 export const getUserById = asynchHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
