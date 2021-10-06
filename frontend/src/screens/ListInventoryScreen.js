@@ -11,7 +11,7 @@ const ListInventoryScreen = (props) => {
   const [listName, setListName] = useState('');
   const dispatch = useDispatch();
 
-  const { user, listInventory } = useSelector((state) => state);
+  const { listInventory } = useSelector((state) => state);
 
   useEffect(() => {
     dispatch(getUser(userId)); // for testing purposes
@@ -22,10 +22,10 @@ const ListInventoryScreen = (props) => {
 
   const addClickHandler = (e) => addScreenEl.classList.toggle('hide');
   const addSubmitHandler = (e) => {
-    console.log(listName);
+    e.preventDefault();
     dispatch(createList(userId, listName));
     setListName('');
-    e.preventDefault();
+    addScreenEl.classList.toggle('hide');
   };
 
   return (

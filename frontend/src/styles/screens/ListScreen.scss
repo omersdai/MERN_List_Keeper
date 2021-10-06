@@ -1,0 +1,48 @@
+@import '../variables';
+@import '../utilities';
+
+.list-screen {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  @include set-background(coral);
+
+  li {
+    width: 500px;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #fff;
+    border-radius: 20px;
+
+    label {
+      display: flex;
+      align-items: center;
+    }
+
+    input[type='checkbox'] {
+      //   -webkit-appearance: none;
+      margin: 0 10px;
+      min-width: 30px;
+      min-height: 30px;
+      background: white;
+      border-radius: 5px;
+      border: 2px solid #555;
+    }
+    input[type='checkbox']:checked {
+      background: #abd;
+    }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    button {
+      @extend %btn;
+    }
+  }
+}

@@ -9,8 +9,8 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
 
   const userList = useSelector((state) => state.userList);
-  const user = useSelector((state) => state.user);
-  const { loading, users, error } = userList;
+  // const user = useSelector((state) => state.user);
+  const { loading, error } = userList;
 
   useEffect(() => {
     dispatch(listUsers());
@@ -21,7 +21,7 @@ const HomeScreen = () => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message variant='danger'>{error}</Message>
+        <Message variant="danger">{error}</Message>
       ) : (
         <Welcome />
       )}
