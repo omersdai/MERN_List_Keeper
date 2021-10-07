@@ -11,21 +11,15 @@ const ListScreen = (props) => {
 
   const { list } = useSelector((state) => state);
 
-  // const list = {
-  //   list: {
-  //     name: 'This a random temp list',
-  //     items: [
-  //       {
-  //         text: 'this is 1asdasdasdasdasdasdas asdas asdasdasdasd as dasdas dasd as dasd asdas dasdas as das',
-  //       },
-  //       { text: 'this is 1' },
-  //       { text: 'this is 1' },
-  //       { text: 'this is 1' },
-  //     ],
-  //   },
-  // };
-
   const [newItem, setNewItem] = useState('');
+
+  const onLabelClick = (e) => {};
+
+  const onCrossClick = (e) => {
+    // console.log(e.target.getAttribute('item-index'));
+    // console.log(document.getElementById('myBtn'));
+    console.log(e.target);
+  };
 
   const onNewItemClick = (e) => {
     dispatch(addListItem({ text: newItem }));
@@ -42,16 +36,23 @@ const ListScreen = (props) => {
   }, [dispatch, listId]);
   return (
     <Fragment>
-      {list.loading || (
+      {!list.loading && (
         <div className="list-screen">
           <h1>{list.list.name}</h1>
           <ul>
             {list.list.items.map((item, idx) => (
               <li key={idx}>
-                <label>
+                <label item-index={idx} id={``}>
                   <input type="checkbox" />
                   {item.text}
                 </label>
+                <button
+                  className="delete-button"
+                  onClick={onCrossClick}
+                  id={idx}
+                >
+                  <i className="fas fa-times-circle fa-2x"></i>
+                </button>
               </li>
             ))}
           </ul>
@@ -67,6 +68,14 @@ const ListScreen = (props) => {
           <div className="button-container">
             <button onClick={onNewItemClick}>New Item</button>
             <button onClick={onSaveListClick}>Save List</button>
+            <button
+              className="delete-button"
+              onClick={onCrossClick}
+              item-index={31}
+              id="myBtn"
+            >
+              <i className="fas fa-times-circle fa-2x"></i>
+            </button>
           </div>
         </div>
       )}

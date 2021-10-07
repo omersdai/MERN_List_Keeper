@@ -28,6 +28,10 @@ const ListInventoryScreen = (props) => {
     addScreenEl.classList.toggle('hide');
   };
 
+  // listInventory.listInventory.forEach((list) =>
+  //   list.items.forEach((item) => console.log(item))
+  // );
+
   return (
     <Fragment>
       <div className="list-inventory">
@@ -40,7 +44,7 @@ const ListInventoryScreen = (props) => {
                     <h3>{list.name}</h3>
                     <h4>
                       {list.items.reduce(
-                        (sum, value) => (sum + value.isCrossed ? 0 : 1),
+                        (sum, value) => sum + (value.isCrossed ? 1 : 0),
                         0
                       )}
                       /{list.items.length} active items
