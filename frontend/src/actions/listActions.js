@@ -21,7 +21,6 @@ export const getInventoryList = (id) => async (dispatch) => {
   try {
     dispatch({ type: LIST_INVENTORY_REQUEST });
 
-    console.log(id);
     const { data } = await axios.get(`/api/lists/${id}`);
 
     dispatch({
@@ -92,8 +91,6 @@ export const deleteListItem = (idx) => async (dispatch) => {
 export const saveList = (userId, list) => async (dispatch) => {
   try {
     dispatch({ type: SAVE_LIST_REQUEST });
-
-    console.log(list);
 
     const { data } = await axios.put(`/api/lists/${userId}`, list);
 

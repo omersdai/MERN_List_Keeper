@@ -8,8 +8,10 @@ import '../styles/screens/ListInventoryScreen.scss';
 const ListInventoryScreen = (props) => {
   const userId = '61462902969c22c63acde0a5';
 
-  const [listName, setListName] = useState('');
   const dispatch = useDispatch();
+  const [listName, setListName] = useState('');
+  const [hideAddScreen, setHideAddScreen] = useState(true);
+  const [hideDeleteScreen, setHideDeleteScreen] = useState(true);
 
   const { listInventory } = useSelector((state) => state);
 
@@ -18,14 +20,19 @@ const ListInventoryScreen = (props) => {
     dispatch(getInventoryList(userId));
   }, [dispatch]);
 
-  const addScreenEl = document.getElementById('addScreen');
+  // HANDLERS
+  const toggleDeletePopup = (e) => {
+    e.preventDefault();
+    console.log(e.currentTarget.id);
+    setHideDeleteScreen(!hideDeleteScreen);
+  };
 
-  const addClickHandler = (e) => addScreenEl.classList.toggle('hide');
-  const addSubmitHandler = (e) => {
+  const toggleAddPopup = (e) => setHideAddScreen(!hideAddScreen);
+  const onAddSubmit = (e) => {
     e.preventDefault();
     dispatch(createList(userId, listName));
     setListName('');
-    addScreenEl.classList.toggle('hide');
+    setHideAddScreen(!hideAddScreen);
   };
 
   return (
@@ -37,6 +44,13 @@ const ListInventoryScreen = (props) => {
               <Link key={list._id} to={`/list/${list._id}`}>
                 <li>
                   <div className="list-box">
+                    <button
+                      className="delete-btn"
+                      onClick={toggleDeletePopup}
+                      id={list._id}
+                    >
+                      <i className="fas fa-times-circle fa-2x"></i>
+                    </button>
                     <h3>{list.name}</h3>
                     <h4>
                       {list.items.reduce(
@@ -50,18 +64,16 @@ const ListInventoryScreen = (props) => {
               </Link>
             ))}
         </ul>
-        <button onClick={addClickHandler}>Add New List</button>
+        <button className="add-btn" onClick={toggleAddPopup}>
+          Add New List
+        </button>
       </div>
-      <div id="addScreen" className="hide add-list-screen">
-        <div className="top-right">
-          <button>
-            <i
-              className="fas fa-times-circle fa-2x"
-              onClick={addClickHandler}
-            ></i>
-          </button>
-        </div>
-        <form onSubmit={addSubmitHandler}>
+      <div className={`popup-screen add-screen ${hideAddScreen ? 'hide' : ''}`}>
+        <button className="cross-btn">
+          <i className="fas fa-times-circle fa-2x" onClick={toggleAddPopup}></i>
+        </button>
+
+        <form onSubmit={onAddSubmit}>
           <h1>Create a new list:</h1>
           <div className="form-control">
             <label>
@@ -74,7 +86,25 @@ const ListInventoryScreen = (props) => {
               />
             </label>
           </div>
-          <button className="submit-btn">Submit</button>
+          <button className="popup-btn">Submit</button>
+        </form>
+      </div>
+      <div
+        className={`popup-screen delete-screen ${
+          hideDeleteScreen ? 'hide' : ''
+        }`}
+      >
+        <button className="cross-btn">
+          <i
+            className="fas fa-times-circle fa-2x"
+            onClick={toggleDeletePopup}
+          ></i>
+        </button>
+
+        <form onSubmit={onAddSubmit}>
+          <h1>Delete:</h1>
+
+          <button className="popup-btn">Delete</button>
         </form>
       </div>
     </Fragment>

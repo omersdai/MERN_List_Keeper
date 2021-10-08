@@ -19,6 +19,12 @@ const ListScreen = (props) => {
 
   const [newItem, setNewItem] = useState('');
 
+  useEffect(() => {
+    dispatch(getUser(userId)); // for testing purposes
+    dispatch(getList(userId, listId));
+  }, [dispatch, listId]);
+
+  // HANDLERS
   const onLabelClick = (e) => {
     e.preventDefault();
     dispatch(toggleListItem(parseInt(e.currentTarget.id)));
@@ -37,10 +43,6 @@ const ListScreen = (props) => {
     dispatch(saveList(userId, list.list));
   };
 
-  useEffect(() => {
-    dispatch(getUser(userId)); // for testing purposes
-    dispatch(getList(userId, listId));
-  }, [dispatch, listId]);
   return (
     <Fragment>
       {!list.loading && (
@@ -60,11 +62,7 @@ const ListScreen = (props) => {
                     {item.text}
                   </div>
                 </label>
-                <button
-                  className="delete-button"
-                  onClick={onCrossClick}
-                  id={idx}
-                >
+                <button className="delete-btn" onClick={onCrossClick} id={idx}>
                   <i className="fas fa-times-circle fa-2x"></i>
                 </button>
               </li>
@@ -80,7 +78,7 @@ const ListScreen = (props) => {
             />
           </label>
 
-          <div className="button-container">
+          <div className="btn-container">
             <button onClick={onNewItemClick}>Add New Item</button>
             <button onClick={onSaveListClick}>Save List</button>
           </div>

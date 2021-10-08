@@ -96,3 +96,27 @@ export const editList = asynchHandler(async (req, res) => {
 
   res.json(list);
 });
+
+// @desc Delete a single list which belongs to user
+// @route DELETE /api/lists/:user/:list
+// @access Protected
+export const deleteList = asynchHandler(async (req, res) => {
+  const userID = req.params.user;
+  const listID = req.params.list;
+  const user = await User.findById(userID);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User doesn't exist");
+  }
+
+  let list = await List.findById(listID);
+
+  if (!list || !list.user._id.equals(user._id)) {
+    res.status(404);
+    throw new Error("List doesn't exist");
+  }
+
+  list = await List.findByIdAndDelete(listID);
+  res.json(list);
+});
