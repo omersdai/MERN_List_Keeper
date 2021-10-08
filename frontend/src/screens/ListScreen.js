@@ -1,6 +1,12 @@
 import { Fragment, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addListItem, getList, saveList } from '../actions/listActions';
+import {
+  addListItem,
+  deleteListItem,
+  getList,
+  saveList,
+  toggleListItem,
+} from '../actions/listActions';
 import { getUser } from '../actions/userActions';
 import '../styles/screens/ListScreen.scss';
 
@@ -13,16 +19,17 @@ const ListScreen = (props) => {
 
   const [newItem, setNewItem] = useState('');
 
-  const onLabelClick = (e) => {};
+  const onLabelClick = (e) => {
+    e.preventDefault();
+    dispatch(toggleListItem(parseInt(e.currentTarget.id)));
+  };
 
   const onCrossClick = (e) => {
-    // console.log(e.target.getAttribute('item-index'));
-    // console.log(document.getElementById('myBtn'));
-    console.log(e.target);
+    dispatch(deleteListItem(parseInt(e.currentTarget.id)));
   };
 
   const onNewItemClick = (e) => {
-    dispatch(addListItem({ text: newItem }));
+    dispatch(addListItem({ text: newItem, isChecked: false }));
     setNewItem('');
   };
 
@@ -42,9 +49,16 @@ const ListScreen = (props) => {
           <ul>
             {list.list.items.map((item, idx) => (
               <li key={idx}>
-                <label item-index={idx} id={``}>
-                  <input type="checkbox" />
-                  {item.text}
+                <label id={idx} onClick={onLabelClick}>
+                  <input type="checkbox" checked={item.isChecked} />
+
+                  <div
+                    className={`item-text ${
+                      item.isChecked ? 'item-checked' : ''
+                    }`}
+                  >
+                    {item.text}
+                  </div>
                 </label>
                 <button
                   className="delete-button"
@@ -60,22 +74,15 @@ const ListScreen = (props) => {
           <label>
             <input
               type="text"
+              className="new-item-input"
               value={newItem}
               onInput={(e) => setNewItem(e.target.value)}
             />
           </label>
 
           <div className="button-container">
-            <button onClick={onNewItemClick}>New Item</button>
+            <button onClick={onNewItemClick}>Add New Item</button>
             <button onClick={onSaveListClick}>Save List</button>
-            <button
-              className="delete-button"
-              onClick={onCrossClick}
-              item-index={31}
-              id="myBtn"
-            >
-              <i className="fas fa-times-circle fa-2x"></i>
-            </button>
           </div>
         </div>
       )}

@@ -13,6 +13,8 @@ import {
   SAVE_LIST_SUCCESS,
   SAVE_LIST_FAIL,
   ADD_LIST_ITEM,
+  DELETE_LIST_ITEM,
+  TOGGLE_LIST_ITEM,
 } from '../constants/listConstants';
 
 export const getInventoryList = (id) => async (dispatch) => {
@@ -78,6 +80,13 @@ export const getList = (userId, listId) => async (dispatch) => {
 
 export const addListItem = (newItem) => async (dispatch) => {
   dispatch({ type: ADD_LIST_ITEM, payload: newItem });
+};
+export const toggleListItem = (idx) => async (dispatch) => {
+  dispatch({ type: TOGGLE_LIST_ITEM, payload: idx });
+};
+
+export const deleteListItem = (idx) => async (dispatch) => {
+  dispatch({ type: DELETE_LIST_ITEM, payload: idx });
 };
 
 export const saveList = (userId, list) => async (dispatch) => {

@@ -2,6 +2,9 @@
 @import '../utilities';
 
 .list-screen {
+  $itemWidth: 500px;
+  $itemFontSize: 20px;
+
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -10,8 +13,8 @@
   @include set-background(coral);
 
   li {
-    width: 500px;
-    font-size: 20px;
+    width: $itemWidth;
+    font-size: $itemFontSize;
     padding: 10px;
     margin-bottom: 5px;
     background-color: #fff;
@@ -23,6 +26,14 @@
       display: flex;
       align-items: center;
       cursor: pointer;
+      width: 100%;
+      .item-text {
+        margin: 0px 3px;
+        @extend %force-word-wrap;
+      }
+      .item-checked {
+        text-decoration: line-through;
+      }
     }
 
     input[type='checkbox'] {
@@ -53,6 +64,13 @@
         filter: brightness(0.95);
       }
     }
+  }
+
+  .new-item-input {
+    width: $itemWidth;
+    font-size: $itemFontSize;
+    padding: 10px 63px;
+    border-radius: 20px;
   }
 
   .button-container {

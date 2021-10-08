@@ -28,10 +28,6 @@ const ListInventoryScreen = (props) => {
     addScreenEl.classList.toggle('hide');
   };
 
-  // listInventory.listInventory.forEach((list) =>
-  //   list.items.forEach((item) => console.log(item))
-  // );
-
   return (
     <Fragment>
       <div className="list-inventory">

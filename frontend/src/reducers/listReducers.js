@@ -12,6 +12,8 @@ import {
   SAVE_LIST_SUCCESS,
   SAVE_LIST_REQUEST,
   SAVE_LIST_FAIL,
+  DELETE_LIST_ITEM,
+  TOGGLE_LIST_ITEM,
 } from '../constants/listConstants';
 
 export const listInventoryReducer = (
@@ -50,11 +52,30 @@ export const listReducer = (state = { loading: true, list: {} }, action) => {
       return { loading: false, list: action.payload };
     case SAVE_LIST_FAIL:
       return { ...state, loading: false, error: action.payload };
-
     case ADD_LIST_ITEM:
       return {
         ...state,
         list: { ...state.list, items: [...state.list.items, action.payload] },
+      };
+    case TOGGLE_LIST_ITEM:
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          items: state.list.items.map((item, idx) =>
+            idx !== action.payload
+              ? item
+              : { ...item, isChecked: !item.isChecked }
+          ),
+        },
+      };
+    case DELETE_LIST_ITEM:
+      return {
+        ...state,
+        list: {
+          ...state.list,
+          items: state.list.items.filter((item, idx) => idx !== action.payload),
+        },
       };
     default:
       return state;
