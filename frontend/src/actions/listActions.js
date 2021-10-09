@@ -15,6 +15,9 @@ import {
   ADD_LIST_ITEM,
   DELETE_LIST_ITEM,
   TOGGLE_LIST_ITEM,
+  DELETE_LIST_REQUEST,
+  DELETE_LIST_SUCCESS,
+  DELETE_LIST_FAIL,
 } from '../constants/listConstants';
 
 export const getInventoryList = (id) => async (dispatch) => {
@@ -77,17 +80,6 @@ export const getList = (userId, listId) => async (dispatch) => {
   }
 };
 
-export const addListItem = (newItem) => async (dispatch) => {
-  dispatch({ type: ADD_LIST_ITEM, payload: newItem });
-};
-export const toggleListItem = (idx) => async (dispatch) => {
-  dispatch({ type: TOGGLE_LIST_ITEM, payload: idx });
-};
-
-export const deleteListItem = (idx) => async (dispatch) => {
-  dispatch({ type: DELETE_LIST_ITEM, payload: idx });
-};
-
 export const saveList = (userId, list) => async (dispatch) => {
   try {
     dispatch({ type: SAVE_LIST_REQUEST });
@@ -105,4 +97,35 @@ export const saveList = (userId, list) => async (dispatch) => {
           : error.message,
     });
   }
+};
+
+export const deleteList = (userId, listId) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_LIST_REQUEST });
+
+    const { data } = await axios.delete(`/api/lists/${userId}/${listId}`);
+
+    dispatch({ type: DELETE_LIST_SUCCESS });
+    dispatch(getInventoryList(userId));
+  } catch (error) {
+    dispatch({
+      type: DELETE_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const addListItem = (newItem) => async (dispatch) => {
+  dispatch({ type: ADD_LIST_ITEM, payload: newItem });
+};
+
+export const toggleListItem = (idx) => async (dispatch) => {
+  dispatch({ type: TOGGLE_LIST_ITEM, payload: idx });
+};
+
+export const deleteListItem = (idx) => async (dispatch) => {
+  dispatch({ type: DELETE_LIST_ITEM, payload: idx });
 };

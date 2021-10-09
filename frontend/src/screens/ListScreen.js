@@ -35,6 +35,7 @@ const ListScreen = (props) => {
   };
 
   const onNewItemClick = (e) => {
+    if (newItem.trim() === '') return;
     dispatch(addListItem({ text: newItem, isChecked: false }));
     setNewItem('');
   };
@@ -52,7 +53,17 @@ const ListScreen = (props) => {
             {list.list.items.map((item, idx) => (
               <li key={idx}>
                 <label id={idx} onClick={onLabelClick}>
-                  <input type="checkbox" checked={item.isChecked} />
+                  <input
+                    type="checkbox"
+                    checked={item.isChecked}
+                    id={idx}
+                    onChange={(e) => {
+                      setTimeout(
+                        () => (e.target.checked = !item.isChecked),
+                        10
+                      );
+                    }}
+                  />
 
                   <div
                     className={`item-text ${

@@ -14,6 +14,9 @@ import {
   SAVE_LIST_FAIL,
   DELETE_LIST_ITEM,
   TOGGLE_LIST_ITEM,
+  DELETE_LIST_REQUEST,
+  DELETE_LIST_SUCCESS,
+  DELETE_LIST_FAIL,
 } from '../constants/listConstants';
 
 export const listInventoryReducer = (
@@ -52,6 +55,12 @@ export const listReducer = (state = { loading: true, list: {} }, action) => {
       return { loading: false, list: action.payload };
     case SAVE_LIST_FAIL:
       return { ...state, loading: false, error: action.payload };
+    case DELETE_LIST_REQUEST:
+      return { ...state, loading: true };
+    case DELETE_LIST_SUCCESS:
+      return { loading: false, list: {} };
+    case DELETE_LIST_FAIL:
+      return { ...state, loading: false };
     case ADD_LIST_ITEM:
       return {
         ...state,
