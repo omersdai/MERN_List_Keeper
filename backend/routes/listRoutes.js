@@ -6,11 +6,16 @@ import {
   editList,
   deleteList,
 } from '../controllers/listController.js';
+import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.route('/:user').get(getListInventory).post(createList).put(editList);
+router
+  .route('/')
+  .get(protect, getListInventory)
+  .post(protect, createList)
+  .put(protect, editList);
 
-router.route('/:user/:list').get(getList).delete(deleteList);
+router.route('/:list').get(protect, getList).delete(protect, deleteList);
 
 export default router;

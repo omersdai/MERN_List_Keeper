@@ -3,37 +3,26 @@ import User from '../models/userModel.js';
 import List from '../models/listModel.js';
 
 // @desc Get all lists which belongs to user
-// @route GET /api/lists/:user
+// @route GET /api/lists/
 // @access Protected
 export const getListInventory = asynchHandler(async (req, res) => {
-  const userID = req.params.user;
-  const user = await User.findById(userID);
+  const listInventory = await List.find({ user: req.user });
 
-  const listInventory = await List.find({ user });
-
-  if (user) {
+  if (listInventory) {
     res.json(listInventory);
   } else {
-    res.status(404).json({ message: 'User not found' });
+    res.status(404).json({ message: 'List not found' });
   }
 });
 
 // @desc Create a new list for a user
-// @route POST /api/lists/:user
+// @route POST /api/lists/
 // @access Protected
 export const createList = asynchHandler(async (req, res) => {
-  const userID = req.params.user;
   const { name } = req.body;
 
-  const user = await User.findById(userID);
-
-  if (!user) {
-    res.status(404);
-    throw new Error("User doesn't exist");
-  }
-
   const list = await List.create({
-    user,
+    user: req.user,
     name,
   });
 
@@ -46,21 +35,14 @@ export const createList = asynchHandler(async (req, res) => {
 });
 
 // @desc Get a single list which belongs to user
-// @route GET /api/lists/:user/:list
+// @route GET /api/lists/:list
 // @access Protected
 export const getList = asynchHandler(async (req, res) => {
-  const userID = req.params.user;
   const listID = req.params.list;
-  const user = await User.findById(userID);
-
-  if (!user) {
-    res.status(404);
-    throw new Error("User doesn't exist");
-  }
 
   const list = await List.findById(listID);
 
-  if (!list || !list.user._id.equals(user._id)) {
+  if (!list || !list.user._id.equals(req.user._id)) {
     res.status(404);
     throw new Error("List doesn't exist");
   }
@@ -69,20 +51,12 @@ export const getList = asynchHandler(async (req, res) => {
 });
 
 // @desc Edit list which belongs to a user
-// @route PUT /api/lists/:user/
+// @route PUT /api/lists/
 // @access Protected
 export const editList = asynchHandler(async (req, res) => {
-  const userID = req.params.user;
   const list = req.body;
 
-  const user = await User.findById(userID);
-
-  if (!user) {
-    res.status(404);
-    throw new Error("User doesn't exist");
-  }
-
-  if (!list || user._id.toString() !== list.user) {
+  if (!list || req.user._id.toString() !== list.user) {
     res.status(404);
     throw new Error("List doesn't exist");
   }
@@ -98,21 +72,14 @@ export const editList = asynchHandler(async (req, res) => {
 });
 
 // @desc Delete a single list which belongs to user
-// @route DELETE /api/lists/:user/:list
+// @route DELETE /api/lists/:list
 // @access Protected
 export const deleteList = asynchHandler(async (req, res) => {
-  const userID = req.params.user;
   const listID = req.params.list;
-  const user = await User.findById(userID);
-
-  if (!user) {
-    res.status(404);
-    throw new Error("User doesn't exist");
-  }
 
   let list = await List.findById(listID);
 
-  if (!list || !list.user._id.equals(user._id)) {
+  if (!list || !list.user._id.equals(req.user._id)) {
     res.status(404);
     throw new Error("List doesn't exist");
   }
