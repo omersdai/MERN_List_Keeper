@@ -18,7 +18,7 @@ const ListInventoryScreen = (props) => {
   const { listInventory } = useSelector((state) => state);
 
   useEffect(() => {
-    console.log('fix this');
+    dispatch(getInventoryList());
   }, [dispatch]);
 
   // HANDLERS
@@ -40,14 +40,14 @@ const ListInventoryScreen = (props) => {
 
   const onAddSubmit = (e) => {
     e.preventDefault();
-    // dispatch(createList(userId, listName));
+    dispatch(createList(listName));
     setListName('');
     setHideAddScreen(!hideAddScreen);
   };
 
   const onDeleteSubmit = (e) => {
     e.preventDefault();
-    // dispatch(deleteList(userId, list._id));
+    dispatch(deleteList(list._id));
     setList(null);
     setHideDeleteScreen(!hideDeleteScreen);
   };
@@ -71,7 +71,7 @@ const ListInventoryScreen = (props) => {
                     <h3>{list.name}</h3>
                     <h4>
                       {list.items.reduce(
-                        (sum, value) => sum + (value.isCrossed ? 1 : 0),
+                        (sum, value) => sum + (value.isChecked ? 1 : 0),
                         0
                       )}
                       /{list.items.length} active items

@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
@@ -10,9 +10,6 @@ const HomeScreen = () => {
 
   const { loading, error, user } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    console.log('fix this ');
-  }, [dispatch]);
   return (
     <Fragment>
       {loading ? (

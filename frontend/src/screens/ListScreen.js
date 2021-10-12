@@ -18,7 +18,7 @@ const ListScreen = (props) => {
   const [newItem, setNewItem] = useState('');
 
   useEffect(() => {
-    console.log('fix this');
+    dispatch(getList(listId));
   }, [dispatch, listId]);
 
   // HANDLERS
@@ -38,7 +38,7 @@ const ListScreen = (props) => {
   };
 
   const onSaveListClick = (e) => {
-    // dispatch(saveList(userId, list.list));
+    dispatch(saveList(list.list));
   };
 
   return (

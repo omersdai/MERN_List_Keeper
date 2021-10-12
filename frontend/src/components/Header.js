@@ -21,10 +21,8 @@ const Header = () => {
             <Link to="/profile">
               <i className="fas fa-user"></i> {user.name}
             </Link>
-            <li>
-              <Link onClick={logoutHandler}>
-                <i className="fas fa-sign-in-alt"></i> Log Out
-              </Link>
+            <li onClick={logoutHandler}>
+              <i className="fas fa-sign-in-alt"></i> Log Out
             </li>
           </Fragment>
         ) : (

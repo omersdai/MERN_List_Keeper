@@ -20,11 +20,21 @@ import {
   DELETE_LIST_FAIL,
 } from '../constants/listConstants';
 
-export const getInventoryList = (id) => async (dispatch) => {
+export const getInventoryList = () => async (dispatch, getState) => {
   try {
     dispatch({ type: LIST_INVENTORY_REQUEST });
 
-    const { data } = await axios.get(`/api/lists/${id}`);
+    const {
+      user: { user },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    const { data } = await axios.get('/api/lists/', config);
 
     dispatch({
       type: LIST_INVENTORY_SUCCESS,
@@ -41,16 +51,30 @@ export const getInventoryList = (id) => async (dispatch) => {
   }
 };
 
-export const createList = (userId, listName) => async (dispatch) => {
+export const createList = (listName) => async (dispatch, getState) => {
   try {
     dispatch({ type: LIST_ADD_REQUEST });
 
-    const { data } = await axios.post(`/api/lists/${userId}`, {
-      name: listName,
-    });
+    const {
+      user: { user },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    const { data } = await axios.post(
+      '/api/lists',
+      {
+        name: listName,
+      },
+      config
+    );
 
     dispatch({ type: LIST_ADD_SUCCESS, payload: data });
-    dispatch(getInventoryList(userId));
+    dispatch(getInventoryList());
   } catch (error) {
     dispatch({
       type: LIST_ADD_FAIL,
@@ -62,11 +86,21 @@ export const createList = (userId, listName) => async (dispatch) => {
   }
 };
 
-export const getList = (userId, listId) => async (dispatch) => {
+export const getList = (listId) => async (dispatch, getState) => {
   try {
     dispatch({ type: GET_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/lists/${userId}/${listId}`);
+    const {
+      user: { user },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/lists/${listId}`, config);
 
     dispatch({ type: GET_LIST_SUCCESS, payload: data });
   } catch (error) {
@@ -80,14 +114,24 @@ export const getList = (userId, listId) => async (dispatch) => {
   }
 };
 
-export const saveList = (userId, list) => async (dispatch) => {
+export const saveList = (list) => async (dispatch, getState) => {
   try {
     dispatch({ type: SAVE_LIST_REQUEST });
 
-    const { data } = await axios.put(`/api/lists/${userId}`, list);
+    const {
+      user: { user },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    const { data } = await axios.put('/api/lists', list, config);
 
     dispatch({ type: SAVE_LIST_SUCCESS, payload: data });
-    dispatch(getInventoryList(userId));
+    dispatch(getInventoryList());
   } catch (error) {
     dispatch({
       type: SAVE_LIST_FAIL,
@@ -99,14 +143,24 @@ export const saveList = (userId, list) => async (dispatch) => {
   }
 };
 
-export const deleteList = (userId, listId) => async (dispatch) => {
+export const deleteList = (listId) => async (dispatch, getState) => {
   try {
     dispatch({ type: DELETE_LIST_REQUEST });
 
-    await axios.delete(`/api/lists/${userId}/${listId}`); // returns deleted list
+    const {
+      user: { user },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+
+    await axios.delete(`/api/lists/${listId}`, config); // returns deleted list
 
     dispatch({ type: DELETE_LIST_SUCCESS });
-    dispatch(getInventoryList(userId));
+    dispatch(getInventoryList());
   } catch (error) {
     dispatch({
       type: DELETE_LIST_FAIL,
