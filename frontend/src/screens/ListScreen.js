@@ -7,11 +7,9 @@ import {
   saveList,
   toggleListItem,
 } from '../actions/listActions';
-import { getUser } from '../actions/userActions';
 import '../styles/screens/ListScreen.scss';
 
 const ListScreen = (props) => {
-  const userId = '61462902969c22c63acde0a5';
   const { id: listId } = props.match.params;
   const dispatch = useDispatch();
 
@@ -20,8 +18,7 @@ const ListScreen = (props) => {
   const [newItem, setNewItem] = useState('');
 
   useEffect(() => {
-    dispatch(getUser(userId)); // for testing purposes
-    dispatch(getList(userId, listId));
+    console.log('fix this');
   }, [dispatch, listId]);
 
   // HANDLERS
@@ -41,7 +38,7 @@ const ListScreen = (props) => {
   };
 
   const onSaveListClick = (e) => {
-    dispatch(saveList(userId, list.list));
+    // dispatch(saveList(userId, list.list));
   };
 
   return (

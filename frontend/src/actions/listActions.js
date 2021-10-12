@@ -103,7 +103,7 @@ export const deleteList = (userId, listId) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_LIST_REQUEST });
 
-    const { data } = await axios.delete(`/api/lists/${userId}/${listId}`);
+    await axios.delete(`/api/lists/${userId}/${listId}`); // returns deleted list
 
     dispatch({ type: DELETE_LIST_SUCCESS });
     dispatch(getInventoryList(userId));

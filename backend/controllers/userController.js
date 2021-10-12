@@ -61,10 +61,10 @@ export const registerUser = asynchHandler(async (req, res) => {
   }
 
   res.status(201).json({
-    _id,
-    name,
-    email,
-    isAdmin,
+    _id: user._id,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
     token: generateToken(user._id),
   });
 });

@@ -34,6 +34,7 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 userSchema.pre('save', async function (next) {
   // you can't use this keyword with arrow functions
   if (!this.isModified('password')) {
+    // only rehash if password is modified
     next();
   }
 

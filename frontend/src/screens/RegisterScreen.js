@@ -1,37 +1,50 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../actions/userActions';
+import { registerUser } from '../actions/userActions';
 import '../styles/screens/LoginScreen.scss';
 
 const LogInScreen = ({ location, history }) => {
   console.log(location, history);
 
   const dispatch = useDispatch();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { loading, error, user } = useSelector((state) => state.user); // TODO: Handle error and loading
-
-  const redirect = location.search ? location.search.split('=')[1] : '';
-
-  useEffect(() => {
-    if (user) {
-      history.push(redirect);
-    }
-  }, [history, user, redirect]);
+  const { user } = useSelector((state) => state.user); // TODO: Handle error and loading
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(email, password));
+    dispatch(registerUser(name, email, password));
+    console.log('clicked submit');
   };
+
+  useEffect(() => {
+    if (user) {
+      history.push('/');
+    }
+  }, [user]);
 
   return (
     <div className="login-screen">
       <div className="form-container">
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <h2>Login </h2>
+            <h2>Register</h2>
           </div>
+
+          <div className="form-group">
+            <label>
+              Name
+              <input
+                type="text"
+                placeholder="Enter name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
+          </div>
+
           <div className="form-group">
             <label>
               Email Address

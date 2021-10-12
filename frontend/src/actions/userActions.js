@@ -1,26 +1,29 @@
 import axios from 'axios';
 import {
-  USER_LIST_REQUEST,
-  USER_LIST_SUCCESS,
-  USER_LIST_FAIL,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAIL,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGOUT_USER,
 } from '../constants/userConstants';
 
-export const listUsers = () => async (dispatch) => {
+export const loginUser = (email, password) => async (dispatch) => {
   try {
-    dispatch({ type: USER_LIST_REQUEST });
+    dispatch({ type: LOGIN_REQUEST });
 
-    const { data } = await axios.get('/api/users');
+    const { data } = await axios.post(`/api/users/login`, { email, password });
 
     dispatch({
-      type: USER_LIST_SUCCESS,
+      type: LOGIN_SUCCESS,
       payload: data,
     });
+
+    localStorage.setItem('user', JSON.stringify(data));
   } catch (error) {
     dispatch({
-      type: USER_LIST_FAIL,
+      type: LOGIN_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
@@ -29,23 +32,31 @@ export const listUsers = () => async (dispatch) => {
   }
 };
 
-export const getUser = (id) => async (dispatch) => {
+export const registerUser = (name, email, password) => async (dispatch) => {
   try {
-    dispatch({ type: GET_USER_REQUEST });
+    dispatch({ type: REGISTER_REQUEST });
 
-    const { data } = await axios.get(`/api/users/${id}`);
+    const { data } = await axios.post(`/api/users/`, { name, email, password });
 
     dispatch({
-      type: GET_USER_SUCCESS,
+      type: REGISTER_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: GET_USER_FAIL,
+      type: REGISTER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message,
     });
+  }
+};
+
+export const logoutUser = () => async (dispatch) => {
+  try {
+    dispatch({ type: LOGOUT_USER });
+  } catch (error) {
+    console.log(error);
   }
 };

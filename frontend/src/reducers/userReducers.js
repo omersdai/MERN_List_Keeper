@@ -1,33 +1,29 @@
 import {
-  USER_LIST_REQUEST,
-  USER_LIST_SUCCESS,
-  USER_LIST_FAIL,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAIL,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGOUT_USER,
 } from '../constants/userConstants';
 
-export const userListReducer = (state = { users: [] }, action) => {
+export const userReducer = (state = { user: null }, action) => {
   switch (action.type) {
-    case USER_LIST_REQUEST:
-      return { loading: true, users: [] };
-    case USER_LIST_SUCCESS:
-      return { loading: false, users: action.payload };
-    case USER_LIST_FAIL:
-      return { loading: false, error: action.payload };
-    default:
-      return state;
-  }
-};
-
-export const userReducer = (state = { user: {} }, action) => {
-  switch (action.type) {
-    case GET_USER_REQUEST:
-      return { loading: true, user: {} };
-    case GET_USER_SUCCESS:
+    case LOGIN_REQUEST:
+      return { loading: true };
+    case LOGIN_SUCCESS:
       return { loading: false, user: action.payload };
-    case GET_USER_FAIL:
+    case LOGIN_FAIL:
       return { loading: false, error: action.payload };
+    case REGISTER_REQUEST:
+      return { loading: true };
+    case REGISTER_SUCCESS:
+      return { loading: false, user: action.payload };
+    case REGISTER_FAIL:
+      return { loading: false, error: action.payload };
+    case LOGOUT_USER:
+      return { user: null };
     default:
       return state;
   }

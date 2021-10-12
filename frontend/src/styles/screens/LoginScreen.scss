@@ -1,0 +1,42 @@
+@import '../variables';
+@import '../utilities';
+
+.login-screen {
+  width: 100vw;
+  background-color: coral;
+  padding: 25px 10px;
+  display: flex;
+  justify-content: center;
+  font-size: 23px;
+
+  .form-container {
+    @include set-background(white);
+
+    width: 400px;
+    padding: 40px;
+    border-radius: 20px;
+    display: flex;
+    box-shadow: $boxShadow;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0px;
+  }
+
+  label {
+    color: rgb(112, 112, 112);
+  }
+
+  input {
+    @extend %input;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .submit-btn {
+    @extend %btn;
+    @include set-background($primaryColor);
+  }
+}

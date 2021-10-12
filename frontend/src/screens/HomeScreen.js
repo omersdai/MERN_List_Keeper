@@ -1,20 +1,17 @@
 import { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, listUsers } from '../actions/userActions';
-import Welcome from '../components/Welcome';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import '../styles/screens/HomeScreen.scss';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
-  const userList = useSelector((state) => state.userList);
-  // const user = useSelector((state) => state.user);
-  const { loading, error } = userList;
+  const { loading, error, user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    dispatch(listUsers());
-    dispatch(getUser('61462902969c22c63acde0a5')); // for testing purposes
+    console.log('fix this ');
   }, [dispatch]);
   return (
     <Fragment>
@@ -22,8 +19,21 @@ const HomeScreen = () => {
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
+      ) : user ? (
+        <div className="welcome">
+          <Link to="/listinventory">
+            <button className="btn">Go to my list inventory</button>
+          </Link>
+        </div>
       ) : (
-        <Welcome />
+        <div className="welcome">
+          <h1>Welcome to List Keeper</h1>
+          <h3>Log in to access your lists.</h3>
+          <h3>
+            Don't have an account? Sign up today to keep track of your lists
+            from anywhere for free!
+          </h3>
+        </div>
       )}
     </Fragment>
   );

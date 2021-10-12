@@ -1,6 +1,10 @@
 // @extend %flex-center;
 // @inlcude set-background($color);
 // background: darken($primaryColor, 10%) lighten($primaryColor, 10%)
+
+// https://getcssscan.com/css-box-shadow-examples
+$boxShadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
 .hide {
   display: none !important;
 }
@@ -19,6 +23,12 @@
   &:hover {
     filter: brightness(0.95);
   }
+}
+
+%input {
+  font-size: 23px;
+  border-radius: 5px;
+  padding: 5px 10px;
 }
 
 @function set-text-color($bg-color) {
@@ -49,8 +59,8 @@
   transform: translate(-50%, -50%);
 }
 
+// https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
 %force-word-wrap {
-  // https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
   overflow-wrap: break-word;
   word-wrap: break-word;
 
