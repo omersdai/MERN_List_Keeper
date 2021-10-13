@@ -56,6 +56,8 @@ export const registerUser = (name, email, password) => async (dispatch) => {
 export const logoutUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOGOUT_USER });
+
+    localStorage.removeItem('user');
   } catch (error) {
     console.log(error);
   }
