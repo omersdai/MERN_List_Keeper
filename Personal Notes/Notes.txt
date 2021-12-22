@@ -1,0 +1,77 @@
+Prep:
+1. Applicationi design et.
+2. Test caseler yaz.
+3. Test yazmayi ogren. Unit testing falan filan. React icin ve node.js icin.
+
+Front End:
+Traversy Media MERN e-commerce koduyla calis
+Roboto font family kullan
+CSS yerine sass kullan
+Redux kullan
+Bugun front-end'i %80 bitirmis ol.
+
+rafce ==> normal component
+rafcp ==> prop-types
+
+Front End Testing:
+Component test for component code (presentation logic)
+Unit test for business code, production code
+Consumer Driven Contract (CDC) test for refractor. 
+
+Back End Testing:
+CDC provider test
+Integration test --> routing code(presentation logic)
+Unit test asserting business logic, production code.
+
+4. Contract test ne ogren. Consumer driven contract.  pact io apiblueprints kullan?
+
+2. MERN kodu yaz ve develop et. TraversyMedia tutorialini referans al. React/Redux. TDD seklinde develop etmem bekleniyor. Bu sefer git kullan.
+
+You should write README files for your projects which describes the project and necessary steps to develop, build, test and deploy corresponding project. (You can search for “awesome-readme” from Github and
+checkout for good examples.)
+We expect you to write your architectural decisions to README.
+
+4. Deploy etmesini ogren ve deploy et.
+
+5. Deployment configuration yaz. (i.e. Kubernetes config files, Docker Swarm files etc.) for each project.
+
+build ==> test ==> dockerize ==> deploy2TestEnv ==> Deploy2Prod
+
+All the steps mentioned above can be automated via CI/CD pipelines. We expect you to automate all the steps. You can use any CD/CI pipeline tool(gitlab-ci, circle, travis etc)
+
+
+
+Concepts:
+
+Identifying Test Scenarios:
+What should it do?
+What can you do to it?
+What affects its behavior?
+What is affected by it?
+How can you tell if the business outcome is correct?
+What can go wrong?
+How can you prove the goal is met?
+
+
+Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data aka JSON.
+
+Remote procedure call (RPC)
+a remote procedure call (RPC) is when a computer program causes a procedure to execute on a different computer on a shared network, which is coded as if it were a normal (local) procedure call, without the programmer explicitly coding the details for the remote interaction. This is a form of client–server interaction (caller is client, executor is server), typically implemented via a request–response message-passing system.
+
+Test-driven development (TDD) is a software development process relying on software requirements being converted to test cases before software is fully developed, and tracking all software development by repeatedly testing the software against all test cases. This is as opposed to software being developed first and test cases created later.
+
+
+React Notes:
+props.history.push('/cart'); // Routes to new page
+
+'/cart/:id?' // id parameter is optional
+
+Workflow with MERN stack:
+Create backend
+Create postman API
+Create the component and its functions
+Create constants for reducer
+Create reducer
+Add reducer to store
+Create actions
+Import actions to component
