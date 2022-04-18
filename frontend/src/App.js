@@ -5,7 +5,7 @@ import './styles/App.scss';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomeScreen from './screens/HomeScreen';
-import LoginScreen from './screens/LoginScreen';
+import LogInScreen from './screens/LogInScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ListScreen from './screens/ListScreen';
 import ListInventoryScreen from './screens/ListInventoryScreen';
@@ -17,7 +17,7 @@ const App = () => {
         <Header />
         <main>
           <Route path="/" component={HomeScreen} exact />
-          <Route path="/login" component={LoginScreen} exact />
+          <Route path="/login" component={LogInScreen} exact />
           <Route path="/register" component={RegisterScreen} exact />
           <Route path="/listinventory" component={ListInventoryScreen} exact />
           <Route path="/list/:id" component={ListScreen} exact />

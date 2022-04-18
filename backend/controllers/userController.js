@@ -3,10 +3,10 @@ import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
 
 // @desc Login user
-// @route GET /api/users/login
+// @route POST /api/users/login
 // @access Public
 export const authUser = asynchHandler(async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password } = req.body
 
   const user = await User.findOne({ email });
 
@@ -24,7 +24,7 @@ export const authUser = asynchHandler(async (req, res) => {
   }
 });
 
-// @desc Create new user
+// @desc Fetch User Info
 // @route GET /api/users/profile
 // @access Protected
 export const getUserProfile = asynchHandler(async (req, res) => {
